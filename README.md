@@ -1,4 +1,4 @@
-# Signal Processing Algorithms
+# Pitch detection with FFT
 
 ## Documentation
 
