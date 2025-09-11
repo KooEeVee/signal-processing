@@ -6,8 +6,11 @@ authors = [
     {name = "Kaisa",email = "45688258+KooEeVee@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = "^3.10"
+requires-python = "^3.11"
 dependencies = [
+    "numpy (>=2.3.3,<3.0.0)",
+    "matplotlib (>=3.10.6,<4.0.0)",
+    "sounddevice (>=0.5.2,<0.6.0)"
 ]
 
 
