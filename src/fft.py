@@ -1,12 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sounddevice as sd
+import math
 
 #Record sound with sounddevice as a numpy array, fs = sample rate, len = length of sound in seconds
-def record_sound(fs, len):
+def record_sound(fs, s):
     fs = fs
-    len = len
-    sound = sd.rec(int(len * fs), samplerate=fs, channels=1, dtype="float32")
+    s = s
+    sound = sd.rec(int(s * fs), samplerate=fs, channels=1, dtype="float32")
     sd.wait()
     return sound
 
@@ -23,8 +24,8 @@ def plot_time(sound, fs):
     sound = sound
     fs = fs
     n = sound.shape[0]
-    len = n / fs
-    t = np.linspace(0, len, n)
+    s = n / fs
+    t = np.linspace(0, s, n)
     plt.plot(t, sound)
     plt.xlabel("time [s]")
     plt.ylabel("amplitude")
@@ -42,6 +43,36 @@ def plot_freq(sound, fs):
     plt.xlabel("frequency [Hz]")
     plt.ylabel("magnitude")
     plt.show()
+
+#Implement FFT without numpy.
+def fft(sound):
+    result = []
+    n = len(sound)
+    if n == 1:
+        return sound
+    else:
+        sound_e = sound[::2]
+        sound_o = sound[1::2]
+        ye = fft(sound_e)
+        yo = fft(sound_o)
+        K = []
+        for k in range(n // 2):
+            K.append(k)
+        W = []
+        for k in K:
+            w = complex(math.cos(2 * math.pi * k / n), -math.sin(2 * math.pi * k / n))
+            W.append(w)
+        n_half = len(ye)
+        for k in range(n_half):
+            result.append(ye[k] + W[k] * yo[k])
+        for k in range(n_half):
+            result.append(ye[k] - W[k] * yo[k])
+    # print(f"EVEN: {sound_e}\n")
+    # print(f"ODD: {sound_o}\n")
+    # print(len(sound_e))
+    # print(len(sound_o))
+    # print(len(sound))
+    return result
 
 #Return the lowest peak (fundamental frequency) of sound numpy array signal magnitude spectrum
 def fundamental_frequency(sound, fs):
