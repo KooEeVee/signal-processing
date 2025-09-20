@@ -9,3 +9,5 @@
 [Week 1](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week1.md)
 
 [Week 2](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week2.md)
+
+[Week 3](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week3.md)

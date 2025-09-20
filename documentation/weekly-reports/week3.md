@@ -14,6 +14,7 @@ I also spent time to learn about the FFT implementation. Now I have a first vers
 - Collecting test data
 - Start systematic and automatic testing
 - Start coding the UI
+- Create more documentation
 
 ## Questions and challenges
 - 
