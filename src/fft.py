@@ -44,35 +44,31 @@ def plot_freq(sound, fs):
     plt.ylabel("magnitude")
     plt.show()
 
-#Implement FFT without numpy.
-def fft(sound):
-    result = []
-    n = len(sound)
-    if n == 1:
-        return sound
+#Implement FFT without numpy. Divide and conquer Cooley-Tukey algorithm with recursion (radix-2).
+#Each sample n in the time-domain sequence "sound" is transformed to frequency / phase component (frequency bin) k in sequence "result".
+def fft(x):
+    X = [] #FFT output
+    N = len(x) #assuming the number of samples in the signal (sequence of samples, list of values) is of power of two
+    if N == 1: #base case
+        return x
     else:
-        sound_e = sound[::2]
-        sound_o = sound[1::2]
-        ye = fft(sound_e)
-        yo = fft(sound_o)
-        K = []
-        for k in range(n // 2):
+        x_even = x[::2] #divide the signal in even and odd sample values - samples at indices 0, 2, 4, ...
+        x_odd = x[1::2] #samples at indices 1, 3, 5, ...
+        X_even = fft(x_even)
+        X_odd = fft(x_odd)
+        K = [] #frequency component indices
+        for k in range(N // 2):
             K.append(k)
-        W = []
+        W = [] #twiddle factors wk = e^-2*pi*i*k/n = cos(2*pi*k/n) - i*sin(2*pi*k/n) - unit circle divided in k angles
         for k in K:
-            w = complex(math.cos(2 * math.pi * k / n), -math.sin(2 * math.pi * k / n))
+            w = complex(math.cos(2 * math.pi * k / N), -math.sin(2 * math.pi * k / N))
             W.append(w)
-        n_half = len(ye)
-        for k in range(n_half):
-            result.append(ye[k] + W[k] * yo[k])
-        for k in range(n_half):
-            result.append(ye[k] - W[k] * yo[k])
-    # print(f"EVEN: {sound_e}\n")
-    # print(f"ODD: {sound_o}\n")
-    # print(len(sound_e))
-    # print(len(sound_o))
-    # print(len(sound))
-    return result
+        N_2 = len(X_even)
+        for k in range(N_2): #combine the frequency + phase components k to a sequence "result", which is the FFT output
+            X.append(X_even[k] + W[k] * X_odd[k]) #these are the lower frequency bins (0 - N/2)
+        for k in range(N_2): 
+            X.append(X_even[k] - W[k] * X_odd[k]) # these are the higher frequency bins (N/2 - N-1)
+    return X
 
 #Return the lowest peak (fundamental frequency) of sound numpy array signal magnitude spectrum
 def fundamental_frequency(sound, fs):

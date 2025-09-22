@@ -3,9 +3,8 @@ import fft
 import math
 
 def main():
-    fs = 1024
-    s = 1
-    n = fs * s
+    fs = 1024 #sample rate
+    s = 1 #length of sample in seconds
     sound_list = [5, 3, 2, 1]
     #sound = fft.record_sound(fs, s)
     t = np.linspace(0, s, int(fs * s))
