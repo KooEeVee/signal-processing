@@ -44,6 +44,13 @@ def plot_freq(sound, fs):
     plt.ylabel("magnitude")
     plt.show()
 
+def sound_tolist(x):
+    if not isinstance(x, list):
+        x_list = x.tolist()
+        return x_list
+    else:
+        return x
+
 #Implement FFT without numpy. Divide and conquer Cooley-Tukey algorithm with recursion (radix-2).
 #Each sample n in the time-domain sequence "sound" is transformed to frequency / phase component (frequency bin) k in sequence "result".
 def fft(x):

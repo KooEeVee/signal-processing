@@ -5,7 +5,7 @@ import math
 def main():
     fs = 1024 #sample rate
     s = 1 #length of sample in seconds
-    sound_list = [5, 3, 2, 1]
+    #sound_list = [5, 3, 2, 1]
     #sound = fft.record_sound(fs, s)
     t = np.linspace(0, s, int(fs * s))
     sound = np.sin(2 * np.pi * 440 * t)
@@ -19,7 +19,9 @@ def main():
     #fft.plot_time(sound, fs)
     #fft.plot_freq(sound, fs)
     #print(fft.fundamental_frequency(sound, fs))
-    print(fft.fft(sound_list))
+    x = fft.sound_tolist(sound)
+    fft_x = fft.fft(x)
+    print(fft_x)
 
 if __name__ == "__main__":
     main()
