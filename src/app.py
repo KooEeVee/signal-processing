@@ -18,10 +18,11 @@ def main():
     #fft.play_sound(sound, fs)
     #fft.plot_time(sound, fs)
     #fft.plot_freq(sound, fs)
-    #print(fft.fundamental_frequency(sound, fs))
+    print(fft.fundamental_frequency_np(sound, fs))
     x = fft.sound_tolist(sound)
-    fft_x = fft.fft(x)
-    print(fft_x)
+    X = fft.fft(x)
+    print(fft.fundamental_frequency_fft(X, fs))
+
 
 if __name__ == "__main__":
     main()

@@ -44,6 +44,7 @@ def plot_freq(sound, fs):
     plt.ylabel("magnitude")
     plt.show()
 
+#Convert numpy array signal to list
 def sound_tolist(x):
     if not isinstance(x, list):
         x_list = x.tolist()
@@ -77,8 +78,19 @@ def fft(x):
             X.append(X_even[k] - W[k] * X_odd[k]) # these are the higher frequency bins (N/2 - N-1)
     return X
 
+#Return the lowest peak (fundamental frequency) of FFT magnitude spectrum
+def fundamental_frequency_fft(X, fs):
+    N = len(X)
+    X_pos = X[0:N//2]
+    fs = fs
+    mags = [abs(x) for x in X_pos]
+    freqs = [k / N * fs for k in range(N//2)]
+    peak = mags.index(max(mags))
+    f0 = freqs[peak]
+    return f0
+
 #Return the lowest peak (fundamental frequency) of sound numpy array signal magnitude spectrum
-def fundamental_frequency(sound, fs):
+def fundamental_frequency_np(sound, fs):
     sound = sound.ravel()
     fs = fs
     sound_fft = np.abs(np.fft.rfft(sound))
