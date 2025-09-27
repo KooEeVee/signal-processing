@@ -2,6 +2,7 @@
 
 ## Peer Review 1
 Check the src/app.py for code documentation and instructions how to test the program. If you choose to try to run it, go to src: poetry run python app.py
+
 Features:
 - test the pitch detection with synthetic signals
 - plot and listen the test signals - play_sound is commented off by default
