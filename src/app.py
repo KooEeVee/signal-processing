@@ -15,7 +15,7 @@ def main():
     noisy_sound = sounds.generate_noisysine(fs, s, freq, noise_amp)
     #sound = sounds.record_sound(fs, s) #doesn't work
 
-    #Plot and listen to test signals, uncomment to listen
+    #Plot and listen to test signals, uncomment play_sound to listen
     #sounds.play_sound(sound, fs)
     sounds.plot_time(sound, fs)
     sounds.plot_freq(sound, fs)
@@ -27,24 +27,24 @@ def main():
     #Testing numpy fft.rfft function
     f0_a = fft.fundamental_frequency_np(sound, fs)
     note_a = sounds.to_note(f0_a)
-    print(f"Fundamental frequency 'sound' using np.fft.rfft: {f0_a}, note {note_a}")
+    print(f"Fundamental frequency 'sound' using np.fft.rfft: {f0_a} Hz, note {note_a}")
     
     f0_b = fft.fundamental_frequency_np(noisy_sound, fs)
     note_b = sounds.to_note(f0_b)
-    print(f"Fundamental frequency 'noisy sound' using np.fft.rfft: {f0_b}, note {note_b}")
+    print(f"Fundamental frequency 'noisy sound' using np.fft.rfft: {f0_b} Hz, note {note_b}")
 
     #Testing fft.fft function
     x = fft.sound_tolist(sound)
     X = fft.fft(x)
     f0_c = fft.fundamental_frequency_fft(X, fs)
     note_c = sounds.to_note(f0_c)
-    print(f"Fundamental frequency 'sound' using fft.fft: {f0_c}, note {note_c}")
+    print(f"Fundamental frequency 'sound' using fft.fft: {f0_c} Hz, note {note_c}")
 
     x = fft.sound_tolist(noisy_sound)
     X = fft.fft(x)
     f0_d = fft.fundamental_frequency_fft(X, fs)
     note_d = sounds.to_note(f0_d)
-    print(f"Fundamental frequency 'noisy sound' using fft.fft: {f0_d}, note {note_d}")
+    print(f"Fundamental frequency 'noisy sound' using fft.fft: {f0_d} Hz, note {note_d}")
 
 if __name__ == "__main__":
     main()
