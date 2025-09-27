@@ -1,47 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import sounddevice as sd
 import math
-
-#Record sound with sounddevice as a numpy array, fs = sampling rate, s = length of sound in seconds
-def record_sound(fs, s):
-    fs = fs
-    s = s
-    sound = sd.rec(int(s * fs), samplerate=fs, channels=1, dtype="float32")
-    sd.wait()
-    return sound
-
-#Play sound with sounddevice, sound = numpy array, fs = sampling rate
-def play_sound(sound, fs):
-    fs = fs
-    sound = sound
-    sd.play(sound, fs)
-    sd.wait()
-
-#Plot sound numpy array signal in time-domain
-def plot_time(sound, fs):
-    sound = sound
-    fs = fs
-    n = sound.shape[0]
-    s = n / fs
-    t = np.linspace(0, s, n)
-    plt.plot(t, sound)
-    plt.xlabel("time [s]")
-    plt.ylabel("amplitude")
-    plt.show()
-
-#Plot sound numpy array signal magnitude spectrum in frequency-domain (real signal input)
-def plot_freq(sound, fs):
-    sound = sound.ravel()
-    fs = fs
-    sound_fft = np.abs(np.fft.rfft(sound))
-    n = sound.shape[0]
-    freq = np.fft.rfftfreq(n, d=1/fs)
-    plt.plot(freq, sound_fft)
-    plt.xlim(0, 5000)
-    plt.xlabel("frequency [Hz]")
-    plt.ylabel("magnitude")
-    plt.show()
 
 #Return the lowest peak (fundamental frequency) of sound numpy array signal magnitude spectrum (real signal input)
 def fundamental_frequency_np(sound, fs):
@@ -92,9 +50,9 @@ def fft(x):
 def fundamental_frequency_fft(X, fs):
     N = len(X) #number of samples in FFT output
     X_pos = X[0:N//2] #FFT output positive frequencies
-    fs = fs #sample rate
+    fs = fs #sampling rate
     mags = [abs(x) for x in X_pos] #magnitudes of FFT output
     freqs = [k / N * fs for k in range(N//2)] #frequencies
     peak = mags.index(max(mags)) #index of the maximum magnitude
-    f0 = freqs[peak] #freaquency of the maximum magnitude
+    f0 = freqs[peak] #frequency of the maximum magnitude
     return f0
