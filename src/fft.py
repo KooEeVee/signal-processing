@@ -35,7 +35,7 @@ def fft(x):
         K = [] #frequency component indices
         for k in range(N // 2):
             K.append(k)
-        W = [] #twiddle factors wk = e^-2*pi*i*k/n = cos(2*pi*k/n) - i*sin(2*pi*k/n) --> unit circle divided in k angles
+        W = [] #twiddle factors wk = e^-2*pi*i*k/N = cos(2*pi*k/N) - i*sin(2*pi*k/N) --> unit circle divided in k angles
         for k in K:
             w = complex(math.cos(2 * math.pi * k / N), -math.sin(2 * math.pi * k / N))
             W.append(w)
@@ -54,5 +54,5 @@ def fundamental_frequency_fft(X, fs):
     mags = [abs(x) for x in X_pos] #magnitudes of FFT output
     freqs = [k / N * fs for k in range(N//2)] #frequencies
     peak = mags.index(max(mags)) #index of the maximum magnitude
-    f0 = freqs[peak] #frequency of the maximum magnitude
+    f0 = freqs[peak] #freaquency of the maximum magnitude
     return f0
