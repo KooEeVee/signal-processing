@@ -23,3 +23,5 @@ Features:
 [Week 3](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week3.md)
 
 [Week 4](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week4.md)
+
+[Week 5](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week5.md)
