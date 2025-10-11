@@ -1,6 +1,12 @@
 import numpy as np
 import math
 
+#Numpy fft function
+def fft_np(sound):
+    #sound = sound.ravel()
+    sound_fft = np.fft.fft(sound)
+    return sound_fft
+
 #Return the lowest peak (fundamental frequency) of sound numpy array signal magnitude spectrum (real signal input)
 def fundamental_frequency_np(sound, fs):
     sound = sound.ravel()
