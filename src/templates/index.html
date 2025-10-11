@@ -50,8 +50,14 @@
                         <div class="card-body">
                             <h5 class="card-title">Plot sample</h5>
                             <p class="card-text">Plot the test signal in time-domain or frequency-domain</p>
-                            <a href="#" class="btn btn-primary">Plot time</a>
-                            <a href="#" class="btn btn-primary">Plot frequency</a>
+                            <form method="post">
+                                <input type="hidden" name="choose_signal" value="{{ chosen_signal }}">
+                                <button type="submit" name="plot_time_button" class="btn btn-primary mb-2">Plot time</button>
+                                <button type="submit" name="plot_freq_button" class="btn btn-primary mb-2">Plot frequency</button>
+                            </form>
+                            {% if plot_image %}
+                            <img src="data:image/png;base64,{{ plot_image }}" class="img-fluid">
+                            {% endif %}
                         </div>
                     </div>
                 

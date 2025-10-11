@@ -1,7 +1,11 @@
 import numpy as np
 import sounddevice as sd
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import librosa
+import io
+import base64
 
 #Generate test signal, fs = sampling rate, s = length of signal in seconds, f0 = fundamental frequency
 def generate_sine(fs, s, f0):
@@ -50,10 +54,19 @@ def plot_time(sound, fs):
     n = sound.shape[0]
     s = n / fs
     t = np.linspace(0, s, n)
+    plt.figure()
     plt.plot(t, sound)
+    plt.title("Time-domain signal")
     plt.xlabel("time [s]")
     plt.ylabel("amplitude")
-    plt.show()
+    #plt.show()
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
+    plt.close()
+    return image_base64
+    
 
 #Plot sound numpy array signal magnitude spectrum in frequency-domain (real signal input)
 def plot_freq(sound, fs):
@@ -62,8 +75,16 @@ def plot_freq(sound, fs):
     sound_fft = np.abs(np.fft.rfft(sound))
     n = sound.shape[0]
     freq = np.fft.rfftfreq(n, d=1/fs)
+    plt.figure()
     plt.plot(freq, sound_fft)
-    plt.xlim(0, 5000)
+    plt.title("Frequency spectrum")
+    #plt.xlim(0, 5000)
     plt.xlabel("frequency [Hz]")
     plt.ylabel("magnitude")
-    plt.show()
+    #plt.show()
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
+    plt.close()
+    return image_base64
