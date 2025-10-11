@@ -2,7 +2,8 @@
 #import fft
 #import sounds
 from flask import Flask, render_template, request
-from sounds import generate_sine, generate_noisysine, play_sound, plot_time, plot_freq
+from sounds import generate_sine, generate_noisysine, play_sound, plot_time, plot_freq, to_note
+from fft import sound_tolist, fft, fundamental_frequency_fft
 
 app = Flask(__name__)
 
@@ -12,6 +13,7 @@ def index():
     signal = None
     play_signal = None
     plot_image = None
+    pitch_result = None
     
     if request.method == "POST":
         chosen_signal = request.form.get("choose_signal")
@@ -30,7 +32,20 @@ def index():
         if "plot_freq_button" in request.form and signal is not None:
             plot_image = plot_freq(signal, 1024)
 
-    return render_template('index.html', chosen_signal=chosen_signal, play_signal=play_signal, plot_image=plot_image)
+        if "freq_button" in request.form and signal is not None:
+            signal_list = sound_tolist(signal)
+            signal_list_fft = fft(signal_list)
+            frequency = fundamental_frequency_fft(signal_list_fft, 1024)
+            pitch_result = f"Frequency: {frequency:.2f} Hz"
+
+        elif "note_button" in request.form and signal is not None:
+            signal_list = sound_tolist(signal)
+            signal_list_fft = fft(signal_list)
+            frequency = fundamental_frequency_fft(signal_list_fft, 1024)
+            note = to_note(frequency)
+            pitch_result = f"Note: {note}"
+
+    return render_template("index.html", chosen_signal=chosen_signal, play_signal=play_signal, plot_image=plot_image, pitch_result=pitch_result)
 
     #Define the test signal
     fs = 1024 #sampling rate, assuming power of two, no need to change this

@@ -65,8 +65,14 @@
                         <div class="card-body">
                             <h5 class="card-title">Pitch detection</h5>
                             <p class="card-text">Detect the fundamental frequency</p>
-                            <a href="#" class="btn btn-primary">Frequency (Hz)</a>
-                            <a href="#" class="btn btn-primary">Note</a>
+                            <form method="post">
+                                <input type="hidden" name="choose_signal" value="{{ chosen_signal }}">
+                                <button type="submit" name="freq_button" class="btn btn-primary mb-2">Frequency (Hz)</button>
+                                <button type="submit" name="note_button" class="btn btn-primary mb-2">Note</button>
+                            </form>
+                            {% if pitch_result %}
+                            <div class="alert alert-info mt-3">{{ pitch_result }}</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
