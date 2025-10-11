@@ -1,5 +1,5 @@
 ## What did I do this week
-- Programming (6,5 hours)
+- Programming and testing (8 hours)
 - Weekly report (0,25 hours)
 
 ## What did I learn this week

@@ -16,7 +16,7 @@ def test_fft_compare_zeros():
     assert np.allclose(signal_fft, signal_fft_np)
 
 def test_fft_compare_sine():
-    fs = 1024
+    fs = 16384
     s = 2
     f0 = 440
     t = np.linspace(0, s, int(fs * s))
@@ -26,7 +26,7 @@ def test_fft_compare_sine():
     assert np.allclose(signal_fft, signal_fft_np)
 
 def test_fft_compare_two_sines():
-    fs = 1024
+    fs = 16384
     s = 2
     f0a = 440
     f0b = 261.63
@@ -49,7 +49,7 @@ def test_fft_ifft_zeros():
     assert np.allclose(signal, signal_ifft)
 
 def test_fft_ifft_sine():
-    fs = 1024
+    fs = 16384
     s = 2
     f0 = 440
     t = np.linspace(0, s, int(fs * s))
@@ -59,7 +59,7 @@ def test_fft_ifft_sine():
     assert np.allclose(signal, signal_ifft)
 
 def test_fft_ifft_two_sines():
-    fs = 1024
+    fs = 16384
     s = 2
     f0a = 440
     f0b = 261.63

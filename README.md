@@ -1,5 +1,17 @@
 # Pitch detection with FFT
 
+## Peer Review 2
+Use Flask UI in the browser to test the program. Project and the dependencies are managed with Poetry, so the libraries should be easy to install with poetry install.
+
+To open the UI in the browser, go to src folder and type (console): poetry run python app.py
+
+Features:
+- choose the test signal with or without noise
+- plot the test signal in time-domain or frequency domain
+- detect the pitch from the test signal (Hz or note) - correct values for test signal are 440Hz and A4
+
+Documentation work is in progress, but you can run the tests typing: poetry run pytest -v.
+
 ## Peer Review 1
 Check the src/app.py for code documentation and instructions how to test the program. If you choose to try to run it, go to src: poetry run python app.py
 
@@ -25,3 +37,5 @@ Features:
 [Week 4](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week4.md)
 
 [Week 5](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week5.md)
+
+[Week 6](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week6.md)

@@ -18,30 +18,30 @@ def index():
     if request.method == "POST":
         chosen_signal = request.form.get("choose_signal")
         if chosen_signal == "Sine wave":
-            signal = generate_sine(1024, 2, 440)
+            signal = generate_sine(16384, 2, 440)
         elif chosen_signal == "Sine wave with noise":
-            signal = generate_noisysine(1024, 2, 440, 50)
+            signal = generate_noisysine(16384, 2, 440, 50)
 
         """ if "play_button" in request.form and signal is not None:
             play_sound(signal, 1024)
             play_signal = f"Playing signal: {chosen_signal}" """
 
         if "plot_time_button" in request.form and signal is not None:
-            plot_image = plot_time(signal, 1024)
+            plot_image = plot_time(signal, 16384)
         
         if "plot_freq_button" in request.form and signal is not None:
-            plot_image = plot_freq(signal, 1024)
+            plot_image = plot_freq(signal, 16384)
 
         if "freq_button" in request.form and signal is not None:
             signal_list = sound_tolist(signal)
             signal_list_fft = fft(signal_list)
-            frequency = fundamental_frequency_fft(signal_list_fft, 1024)
+            frequency = fundamental_frequency_fft(signal_list_fft, 16384)
             pitch_result = f"Frequency: {frequency:.2f} Hz"
 
         elif "note_button" in request.form and signal is not None:
             signal_list = sound_tolist(signal)
             signal_list_fft = fft(signal_list)
-            frequency = fundamental_frequency_fft(signal_list_fft, 1024)
+            frequency = fundamental_frequency_fft(signal_list_fft, 16384)
             note = to_note(frequency)
             pitch_result = f"Note: {note}"
 
