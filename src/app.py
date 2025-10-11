@@ -1,13 +1,13 @@
 #import numpy as np
 #import fft
 #import sounds
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Signal Processing"
+    return render_template("index.html")
 
     #Define the test signal
     fs = 1024 #sampling rate, assuming power of two, no need to change this
@@ -50,8 +50,6 @@ def index():
     # f0_d = fft.fundamental_frequency_fft(X, fs)
     # note_d = sounds.to_note(f0_d)
     # print(f"Fundamental frequency 'noisy sound' using fft.fft: {f0_d} Hz, note {note_d}")
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
