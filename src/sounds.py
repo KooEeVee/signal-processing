@@ -42,7 +42,6 @@ def play_sound(sound, fs):
     fs = fs
     sound = sound
     sd.play(sound, fs)
-    sd.wait()
 
 #Plot sound numpy array signal in time-domain
 def plot_time(sound, fs):

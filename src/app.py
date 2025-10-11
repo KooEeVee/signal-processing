@@ -1,13 +1,28 @@
 #import numpy as np
 #import fft
 #import sounds
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from sounds import generate_sine, generate_noisysine, play_sound
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    chosen_signal = None
+    signal = None
+    play_signal = None
+    
+    if request.method == "POST":
+        chosen_signal = request.form.get("choose_signal")
+        if chosen_signal == "Sine wave":
+            signal = generate_sine(1024, 2, 440)
+        elif chosen_signal == "Sine wave with noise":
+            signal = generate_noisysine(1024, 2, 440, 50)
+
+        if "play_button" in request.form and signal is not None:
+            play_sound(signal, 1024)
+            play_signal = f"Playing signal: {chosen_signal}"
+    return render_template('index.html', chosen_signal=chosen_signal, play_signal=play_signal)
 
     #Define the test signal
     fs = 1024 #sampling rate, assuming power of two, no need to change this
