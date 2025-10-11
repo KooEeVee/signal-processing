@@ -1,8 +1,13 @@
-import numpy as np
-import fft
-import sounds
+#import numpy as np
+#import fft
+#import sounds
+from flask import Flask
 
-def main():
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "Signal Processing"
 
     #Define the test signal
     fs = 1024 #sampling rate, assuming power of two, no need to change this
@@ -49,4 +54,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
