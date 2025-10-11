@@ -22,9 +22,9 @@ def index():
         elif chosen_signal == "Sine wave with noise":
             signal = generate_noisysine(1024, 2, 440, 50)
 
-        if "play_button" in request.form and signal is not None:
+        """ if "play_button" in request.form and signal is not None:
             play_sound(signal, 1024)
-            play_signal = f"Playing signal: {chosen_signal}"
+            play_signal = f"Playing signal: {chosen_signal}" """
 
         if "plot_time_button" in request.form and signal is not None:
             plot_image = plot_time(signal, 1024)
