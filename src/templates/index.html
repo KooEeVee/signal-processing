@@ -17,18 +17,19 @@
                     
                     <div class="card w-50 mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">Sound sample</h5>
-                            <p class="card-text">Choose the test signal</p>
+                            <h5 class="card-title">Choose sound sample</h5>
+                            <p class="card-text">Choose a test signal from the menu and submit your choice. All of the signals are 2 second samples, 4 generated sine waves and 4 acoustic audio signals (wav files).
+                            </p>
                             <form method="post">
                                 <select class="form-select mb-3" name="choose_signal" aria-label="Choose the test signal">
                                 <option selected value="Sine wave" {% if chosen_signal == "Sine wave" %}selected{% endif %}>Sine wave</option>
                                 <option value="Sine wave with some random noise" {% if chosen_signal == "Sine wave with some random noise" %}selected{% endif %}>Sine wave with some random noise</option>
                                 <option value="Sine wave with lots of random noise" {% if chosen_signal == "Sine wave with lots of random noise" %}selected{% endif %}>Sine wave with lots of random noise</option>
                                 <option value="Harmonic sine waves" {% if chosen_signal == "Harmonic sine waves" %}selected{% endif %}>Harmonic sine waves</option>
-                                <option value="Piano (audio)" {% if chosen_signal == "Piano (audio)" %}selected{% endif %}>Piano (audio)</option>
-                                <option value="Violin (audio)" {% if chosen_signal == "Violin (audio)" %}selected{% endif %}>Violin (audio)</option>
-                                <option value="Guitar (audio)" {% if chosen_signal == "Guitar (audio)" %}selected{% endif %}>Guitar (audio)</option>
-                                <option value="Flute (audio)" {% if chosen_signal == "Flute (audio)" %}selected{% endif %}>Flute (audio)</option>
+                                <option value="Piano (wav)" {% if chosen_signal == "Piano (wav)" %}selected{% endif %}>Piano (wav)</option>
+                                <option value="Violin (wav)" {% if chosen_signal == "Violin (wav)" %}selected{% endif %}>Violin (wav)</option>
+                                <option value="Guitar (wav)" {% if chosen_signal == "Guitar (wav)" %}selected{% endif %}>Guitar (wav)</option>
+                                <option value="Flute (wav)" {% if chosen_signal == "Flute (wav)" %}selected{% endif %}>Flute (wav)</option>
                                 </select>
                                 <button type="submit" name="choose_button" class="btn btn-primary">Submit</button>
                             </form>
@@ -41,7 +42,7 @@
                     <div class="card w-50 mb-4">
                         <div class="card-body">
                             <h5 class="card-title">Plot sample</h5>
-                            <p class="card-text">Plot the test signal in time-domain or frequency-domain</p>
+                            <p class="card-text">Plot the test signal in time-domain or frequency-domain. Frequency spectrum plotting is implemented with numpy FFT library functions. Both scales are linear and normalized for better visual comparison. Note! Sine wave time plots are zoomed to the first 10 milliseconds to show the waveform. Sine wave frequency spectrums are also limited under 2000 Hz.</p>
                             <form method="post">
                                 <input type="hidden" name="choose_signal" value="{{ chosen_signal }}">
                                 <button type="submit" name="plot_time_button" class="btn btn-primary mb-2">Plot time</button>
@@ -56,7 +57,7 @@
                     <div class="card w-50 mb-4">
                         <div class="card-body">
                             <h5 class="card-title">Pitch detection</h5>
-                            <p class="card-text">Detect the fundamental frequency</p>
+                            <p class="card-text">Detect the fundamental frequency aka pitch from the sound sample. This FFT implementation follows the Cooley-Tukey algorithm. You might notice that noise interferes the detection as well as the instrument used. The correct note values for all sine waves are A4. Also piano and violin notes are A4. Guitar is A2 and flute C5. </p>
                             <form method="post">
                                 <input type="hidden" name="choose_signal" value="{{ chosen_signal }}">
                                 <button type="submit" name="freq_button" class="btn btn-primary mb-2">Frequency (Hz)</button>

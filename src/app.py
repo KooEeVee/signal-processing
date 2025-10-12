@@ -25,13 +25,13 @@ def index():
             signal = generate_noisysine(16384, 2, 440, 50)
         elif chosen_signal == "Harmonic sine waves":
             signal = generate_sine(16384, 2, 440) + 1/2 * generate_sine(16384, 2, 880) + 1/3 * generate_sine(16384, 2, 1320)
-        elif chosen_signal == "Piano (audio)":
+        elif chosen_signal == "Piano (wav)":
             signal = sampling_rate("static/Piano.mf.A4.wav")
-        elif chosen_signal == "Violin (audio)":
+        elif chosen_signal == "Violin (wav)":
             signal = sampling_rate("static/Violin.arco.mf.sulA.A4.wav")
-        elif chosen_signal == "Guitar (audio)":
+        elif chosen_signal == "Guitar (wav)":
             signal = sampling_rate("static/Guitar.mf.sulA.A2.mono.wav")
-        elif chosen_signal == "Flute (audio)":
+        elif chosen_signal == "Flute (wav)":
             signal = sampling_rate("static/Flute.nonvib.mf.C5.wav")
 
         if "plot_time_button" in request.form and signal is not None and (chosen_signal == "Sine wave" or chosen_signal == "Sine wave with some random noise" or chosen_signal == "Sine wave with lots of random noise" or chosen_signal == "Harmonic sine waves"):

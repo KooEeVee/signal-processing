@@ -49,12 +49,13 @@ def plot_time(sound, fs):
     n = sound.shape[0]
     s = n / fs
     t = np.linspace(0, s, n)
+    sound = sound / np.max(np.abs(sound))
     plt.figure()
     plt.plot(t, sound)
     plt.title("Time-domain signal")
     plt.xlabel("time [s]")
     plt.ylabel("amplitude")
-    #plt.xlim(0, 0.01)
+    plt.xlim(0, t[-1])
     #plt.show()
     buf = io.BytesIO()
     plt.savefig(buf, format="png")
@@ -70,6 +71,7 @@ def plot_time_sines(sound, fs):
     n = sound.shape[0]
     s = n / fs
     t = np.linspace(0, s, n)
+    sound = sound / np.max(np.abs(sound))
     plt.figure()
     plt.plot(t, sound)
     plt.title("Time-domain signal")
@@ -98,7 +100,7 @@ def plot_freq(sound, fs):
     plt.title("Frequency spectrum")
     plt.xlabel("frequency [Hz]")
     plt.ylabel("magnitude")
-    #plt.xlim(0, 2000)
+    plt.xlim(0, freq[-1])
     #plt.show()
     buf = io.BytesIO()
     plt.savefig(buf, format="png")

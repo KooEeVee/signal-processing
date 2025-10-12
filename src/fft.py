@@ -60,5 +60,5 @@ def fundamental_frequency_fft(X, fs):
     mags = [abs(x) for x in X_pos] #magnitudes of FFT output
     freqs = [k / N * fs for k in range(N//2)] #frequencies
     peak = mags.index(max(mags)) #index of the maximum magnitude
-    f0 = freqs[peak] #freaquency of the maximum magnitude
+    f0 = freqs[peak] #frequency of the maximum magnitude
     return f0

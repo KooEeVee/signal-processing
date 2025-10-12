@@ -6,9 +6,9 @@ Use Flask UI in the browser to test the program. Project and the dependencies ar
 To open the UI in the browser, go to src folder and type (console): poetry run python app.py
 
 Features:
-- choose the test signal with or without noise
-- plot the test signal in time-domain or frequency domain
-- detect the pitch from the test signal (Hz or note) - correct values for test signal are 440Hz and A4
+- choose the test signal with or without noise (UPDATE 12.10. more signals available, also wav files)
+- plot the test signal in time-domain or frequency-domain
+- detect the pitch from the test signal (Hz or note) - correct values for test signal are 440Hz and A4 (UPDATE 12.10. correct values are described in the UI)
 
 Documentation work is in progress, but you can run the tests typing: poetry run pytest -v.
 
