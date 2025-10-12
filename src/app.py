@@ -2,7 +2,7 @@
 #import fft
 #import sounds
 from flask import Flask, render_template, request
-from sounds import generate_sine, generate_noisysine, plot_time, plot_freq, to_note
+from sounds import generate_sine, generate_noisysine, plot_time, plot_freq, to_note, sampling_rate
 from fft import sound_tolist, fft, fundamental_frequency_fft
 
 app = Flask(__name__)
@@ -25,10 +25,18 @@ def index():
             signal = generate_noisysine(16384, 2, 440, 50)
         elif chosen_signal == "Harmonic sine waves":
             signal = generate_sine(16384, 2, 440) + 1/2 * generate_sine(16384, 2, 880) + 1/3 * generate_sine(16384, 2, 1320)
+        elif chosen_signal == "Piano (audio)":
+            signal = sampling_rate("static/Piano.mf.A4.wav")
+        elif chosen_signal == "Violin (audio)":
+            signal = sampling_rate("static/Violin.arco.mf.sulA.A4.wav")
+        elif chosen_signal == "Guitar (audio)":
+            signal = sampling_rate("static/Guitar.mf.sulA.A2.mono.wav")
+        elif chosen_signal == "Flute (audio)":
+            signal = sampling_rate("static/Flute.nonvib.mf.C5.wav")
 
         if "plot_time_button" in request.form and signal is not None:
             plot_image = plot_time(signal, 16384)
-        
+
         if "plot_freq_button" in request.form and signal is not None:
             plot_image = plot_freq(signal, 16384)
 
