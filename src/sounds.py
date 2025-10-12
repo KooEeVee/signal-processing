@@ -42,7 +42,7 @@ def to_freq(note):
     note = note
     return librosa.note_to_hz(note)
 
-#Plot sound numpy array signal in time-domain
+#Plot sound numpy array audio signal in time-domain
 def plot_time(sound, fs):
     sound = sound
     fs = fs
@@ -62,6 +62,27 @@ def plot_time(sound, fs):
     image_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
     plt.close()
     return image_base64
+
+#Plot sound numpy array sine wave signal in time-domain
+def plot_time_sines(sound, fs):
+    sound = sound
+    fs = fs
+    n = sound.shape[0]
+    s = n / fs
+    t = np.linspace(0, s, n)
+    plt.figure()
+    plt.plot(t, sound)
+    plt.title("Time-domain signal")
+    plt.xlabel("time [s]")
+    plt.ylabel("amplitude")
+    plt.xlim(0, 0.01)
+    #plt.show()
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
+    plt.close()
+    return image_base64
     
 
 #Plot sound numpy array signal magnitude spectrum in frequency-domain (real signal input)
@@ -69,6 +90,7 @@ def plot_freq(sound, fs):
     sound = sound.ravel()
     fs = fs
     sound_fft = np.abs(np.fft.rfft(sound))
+    sound_fft /= np.max(sound_fft)
     n = sound.shape[0]
     freq = np.fft.rfftfreq(n, d=1/fs)
     plt.figure()
@@ -77,6 +99,28 @@ def plot_freq(sound, fs):
     plt.xlabel("frequency [Hz]")
     plt.ylabel("magnitude")
     #plt.xlim(0, 2000)
+    #plt.show()
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
+    plt.close()
+    return image_base64
+
+#Plot sound numpy array signal magnitude spectrum in frequency-domain (real signal input)
+def plot_freq_sines(sound, fs):
+    sound = sound.ravel()
+    fs = fs
+    sound_fft = np.abs(np.fft.rfft(sound))
+    sound_fft /= np.max(sound_fft)
+    n = sound.shape[0]
+    freq = np.fft.rfftfreq(n, d=1/fs)
+    plt.figure()
+    plt.plot(freq, sound_fft)
+    plt.title("Frequency spectrum")
+    plt.xlabel("frequency [Hz]")
+    plt.ylabel("magnitude")
+    plt.xlim(0, 2000)
     #plt.show()
     buf = io.BytesIO()
     plt.savefig(buf, format="png")

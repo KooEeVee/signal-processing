@@ -2,7 +2,7 @@
 #import fft
 #import sounds
 from flask import Flask, render_template, request
-from sounds import generate_sine, generate_noisysine, plot_time, plot_freq, to_note, sampling_rate
+from sounds import generate_sine, generate_noisysine, plot_time, plot_time_sines, plot_freq, plot_freq_sines, to_note, sampling_rate
 from fft import sound_tolist, fft, fundamental_frequency_fft
 
 app = Flask(__name__)
@@ -34,10 +34,16 @@ def index():
         elif chosen_signal == "Flute (audio)":
             signal = sampling_rate("static/Flute.nonvib.mf.C5.wav")
 
-        if "plot_time_button" in request.form and signal is not None:
+        if "plot_time_button" in request.form and signal is not None and (chosen_signal == "Sine wave" or chosen_signal == "Sine wave with some random noise" or chosen_signal == "Sine wave with lots of random noise" or chosen_signal == "Harmonic sine waves"):
+            plot_image = plot_time_sines(signal, 16384)
+        
+        elif "plot_time_button" in request.form and signal is not None and (chosen_signal != "Sine wave" or chosen_signal != "Sine wave with some random noise" or chosen_signal != "Sine wave with lots of random noise" or chosen_signal != "Harmonic sine waves"):
             plot_image = plot_time(signal, 16384)
 
-        if "plot_freq_button" in request.form and signal is not None:
+        if "plot_freq_button" in request.form and signal is not None and (chosen_signal == "Sine wave" or chosen_signal == "Sine wave with some random noise" or chosen_signal == "Sine wave with lots of random noise" or chosen_signal == "Harmonic sine waves"):
+            plot_image = plot_freq_sines(signal, 16384)
+
+        elif "plot_freq_button" in request.form and signal is not None and (chosen_signal != "Sine wave" or chosen_signal != "Sine wave with some random noise" or chosen_signal != "Sine wave with lots of random noise" or chosen_signal != "Harmonic sine waves"):
             plot_image = plot_freq(signal, 16384)
 
         if "freq_button" in request.form and signal is not None:
