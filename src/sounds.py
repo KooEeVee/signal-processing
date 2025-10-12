@@ -33,20 +33,6 @@ def to_freq(note):
     note = note
     return librosa.note_to_hz(note)
 
-#Record sound with sounddevice as a numpy array, fs = sampling rate, s = length of sound in seconds
-def record_sound(fs, s):
-    fs = fs
-    s = s
-    sound = sd.rec(int(s * fs), samplerate=fs, channels=1, dtype="float32")
-    sd.wait()
-    return sound
-
-#Play sound with sounddevice, sound = numpy array, fs = sampling rate
-def play_sound(sound, fs):
-    fs = fs
-    sound = sound
-    sd.play(sound, fs)
-
 #Plot sound numpy array signal in time-domain
 def plot_time(sound, fs):
     sound = sound
@@ -81,6 +67,7 @@ def plot_freq(sound, fs):
     plt.title("Frequency spectrum")
     plt.xlabel("frequency [Hz]")
     plt.ylabel("magnitude")
+    plt.xlim(0, 2000)
     #plt.show()
     buf = io.BytesIO()
     plt.savefig(buf, format="png")

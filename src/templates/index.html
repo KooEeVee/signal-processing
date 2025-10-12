@@ -22,7 +22,9 @@
                             <form method="post">
                                 <select class="form-select mb-3" name="choose_signal" aria-label="Choose the test signal">
                                 <option selected value="Sine wave" {% if chosen_signal == "Sine wave" %}selected{% endif %}>Sine wave</option>
-                                <option value="Sine wave with noise" {% if chosen_signal == "Sine wave with noise" %}selected{% endif %}>Sine wave with noise</option>
+                                <option value="Sine wave with some random noise" {% if chosen_signal == "Sine wave with some random noise" %}selected{% endif %}>Sine wave with some random noise</option>
+                                <option value="Sine wave with lots of random noise" {% if chosen_signal == "Sine wave with lots of random noise" %}selected{% endif %}>Sine wave with lots of random noise</option>
+                                <option value="Harmonic sine waves" {% if chosen_signal == "Harmonic sine waves" %}selected{% endif %}>Harmonic sine waves</option>
                                 </select>
                                 <button type="submit" name="choose_button" class="btn btn-primary">Submit</button>
                             </form>
@@ -31,20 +33,6 @@
                             {% endif %}
                         </div>
                     </div>
-            
-                    <!-- <div class="card w-50 mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Play sample</h5>
-                            <p class="card-text">Listen to the test signal. </p>
-                             <form method="post">
-                                <input type="hidden" name="choose_signal" value="{{ chosen_signal }}">
-                                <button type="submit" name="play_button" class="btn btn-primary">Play</button>
-                            </form>
-                            {% if play_signal %}
-                            <div class="alert alert-info mt-3">{{ play_signal }}</div>
-                            {% endif %}
-                        </div>
-                    </div> -->
                 
                     <div class="card w-50 mb-4">
                         <div class="card-body">

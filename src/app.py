@@ -2,7 +2,7 @@
 #import fft
 #import sounds
 from flask import Flask, render_template, request
-from sounds import generate_sine, generate_noisysine, play_sound, plot_time, plot_freq, to_note
+from sounds import generate_sine, generate_noisysine, plot_time, plot_freq, to_note
 from fft import sound_tolist, fft, fundamental_frequency_fft
 
 app = Flask(__name__)
@@ -19,12 +19,12 @@ def index():
         chosen_signal = request.form.get("choose_signal")
         if chosen_signal == "Sine wave":
             signal = generate_sine(16384, 2, 440)
-        elif chosen_signal == "Sine wave with noise":
+        elif chosen_signal == "Sine wave with some random noise":
+            signal = generate_noisysine(16384, 2, 440, 10)
+        elif chosen_signal == "Sine wave with lots of random noise":
             signal = generate_noisysine(16384, 2, 440, 50)
-
-        """ if "play_button" in request.form and signal is not None:
-            play_sound(signal, 1024)
-            play_signal = f"Playing signal: {chosen_signal}" """
+        elif chosen_signal == "Harmonic sine waves":
+            signal = generate_sine(16384, 2, 440) + 1/2 * generate_sine(16384, 2, 880) + 1/3 * generate_sine(16384, 2, 1320)
 
         if "plot_time_button" in request.form and signal is not None:
             plot_image = plot_time(signal, 16384)
