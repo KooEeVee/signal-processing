@@ -26,6 +26,8 @@ Features:
 
 [Specification](https://github.com/KooEeVee/signal-processing/blob/main/documentation/specification.md)
 
+[Implementation](https://github.com/KooEeVee/signal-processing/blob/main/documentation/implementation.md)
+
 ## Weekly Reports
 
 [Week 1](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week1.md)
@@ -39,5 +41,3 @@ Features:
 [Week 5](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week5.md)
 
 [Week 6](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week6.md)
-
-[Week 7](https://github.com/KooEeVee/signal-processing/blob/main/documentation/weekly-reports/week7.md)
