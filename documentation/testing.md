@@ -23,3 +23,9 @@ Verified the results with several inputs:
 - sum of two different sine waves (length 16384 * 2)
 - normally distributed random numbers (length 16384 * 2)
 
+## Running tests
+To run the tests, go to project src folder and type:
+```
+poetry run pytest -v
+```
+
