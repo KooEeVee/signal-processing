@@ -1,5 +1,4 @@
 import numpy as np
-import sounddevice as sd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -7,43 +6,94 @@ import librosa
 import io
 import base64
 
-#Generate test signal, fs = sampling rate, s = length of signal in seconds, f0 = fundamental frequency
+
 def generate_sine(fs, s, f0):
+    """Generate sine wave test signal
+
+    Args:
+        fs (int): sampling rate
+        s (int): length of signal in seconds
+        f0 (int): fundamental frequency
+
+    Returns:
+        array: sine wave test signal
+    """
     fs = fs
     s = s
     f0 = f0
     t = np.linspace(0, s, int(fs * s))
     return np.sin(2 * np.pi * f0 * t)
 
-#Generate test signal, fs = sampling rate, s = length of signal in seconds, f0 = fundamental frequency, noise_amp = noise amplitude
+
 def generate_noisysine(fs, s, f0, noise_amp):
+    """Generate sine wave with noise test signal
+
+    Args:
+        fs (int): sampling rate
+        s (int): length of signal in seconds
+        f0 (int): fundamental frequency
+        noise_amp (int): noise amplitude
+
+    Returns:
+        array: sine wave with noise test signal
+    """
     fs = fs
     s = s
     f0 = f0
     t = np.linspace(0, s, int(fs * s))
     return np.sin(2 * np.pi * f0 * t) + noise_amp * np.random.uniform(-1, 1, len(t)) # type: ignore
 
-#Convert the sampling rate to power of two for fft.fft
+
 def sampling_rate(file):
+    """Convert the sampling rate to power of two for fft.fft
+
+    Args:
+        file (file): wav file
+
+    Returns:
+        array: sound sample with sampling rate 16384 Hz
+    """
     x, fs = librosa.load(file, sr=None, mono=True)
-    print(len(x))
-    print(fs)
     x_sampled = librosa.resample(x, orig_sr=fs, target_sr=16384)
-    print()
     return x_sampled
 
-#Convert frequencies to note names
+
 def to_note(freq):
+    """Convert frequencies to note names
+
+    Args:
+        freq (float): frequency Hz
+
+    Returns:
+        str: note name
+    """
     freq = freq
     return librosa.hz_to_note(freq)
 
-#Convert note names to frequencies
+
 def to_freq(note):
+    """Convert note names to frequencies
+
+    Args:
+        note (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     note = note
     return librosa.note_to_hz(note)
 
-#Plot sound numpy array audio signal in time-domain
+
 def plot_time(sound, fs):
+    """Plot numpy array audio signal in time-domain
+
+    Args:
+        sound (array): sound sample
+        fs (int): sampling rate
+
+    Returns:
+        str: plot as a base64-encoded string
+    """
     sound = sound
     fs = fs
     n = sound.shape[0]
@@ -64,8 +114,17 @@ def plot_time(sound, fs):
     plt.close()
     return image_base64
 
-#Plot sound numpy array sine wave signal in time-domain
+
 def plot_time_sines(sound, fs):
+    """Plot numpy array sine wave signal in time-domain, zoomed in the first 10 ms
+
+    Args:
+        sound (array): sound sample
+        fs (int): sampling rate
+
+    Returns:
+        str: plot as a base64-encoded string
+    """
     sound = sound
     fs = fs
     n = sound.shape[0]
@@ -85,10 +144,18 @@ def plot_time_sines(sound, fs):
     image_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
     plt.close()
     return image_base64
-    
 
-#Plot sound numpy array signal magnitude spectrum in frequency-domain (real signal input)
+
 def plot_freq(sound, fs):
+    """Plot numpy array audio signal magnitude spectrum in frequency-domain (real signal input)
+
+    Args:
+        sound (array): sound sample
+        fs (int): sampling rate
+
+    Returns:
+        str: plot as a base64-encoded string
+    """
     sound = sound.ravel()
     fs = fs
     sound_fft = np.abs(np.fft.rfft(sound))
@@ -109,8 +176,17 @@ def plot_freq(sound, fs):
     plt.close()
     return image_base64
 
-#Plot sound numpy array signal magnitude spectrum in frequency-domain (real signal input)
+#
 def plot_freq_sines(sound, fs):
+    """Plot numpy array sine wave signal magnitude spectrum in frequency-domain (real signal input), zoomed in the first 2000 Hz
+
+    Args:
+        sound (array): sound sample
+        fs (int): sampling rate
+
+    Returns:
+        str: plot as a base64-encoded string
+    """
     sound = sound.ravel()
     fs = fs
     sound_fft = np.abs(np.fft.rfft(sound))
