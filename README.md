@@ -1,32 +1,30 @@
 # Pitch detection with FFT
 
-## Peer Review 2
-Use Flask UI in the browser to test the program. Project and the dependencies are managed with Poetry, so the libraries should be easy to install with poetry install.
+## User Guide
+Use Flask UI in the browser to run the program. Project and the dependencies are managed with Poetry, so the libraries should be easy to install in the project root with:
+```
+poetry install
+```
 
-To open the UI in the browser, go to src folder and type (console): poetry run python app.py
+To open the UI in the browser, go to project src folder and type: 
+```
+poetry run python app.py
+```
 
 Features:
-- choose the test signal with or without noise (UPDATE 12.10. more signals available, also wav files)
+- choose the test signal and submit
 - plot the test signal in time-domain or frequency-domain
-- detect the pitch from the test signal (Hz or note) - correct values for test signal are 440Hz and A4 (UPDATE 12.10. correct values are described in the UI)
+- detect the pitch from the test signal (Hz or note) - correct values are described in the UI
 
-Documentation work is in progress, but you can run the tests typing: poetry run pytest -v.
-
-## Peer Review 1
-Check the src/app.py for code documentation and instructions how to test the program. If you choose to try to run it, go to src: poetry run python app.py
-
-Features:
-- test the pitch detection with synthetic signals
-- plot and listen the test signals - play_sound is commented off by default
-- compare the pitch detection results achieved with numpy fft functions and fft algorithm
-- change the test signals' pitch and see how it shows in the results
-- add or reduce noise in the test signals to see how it interferes with the pitch detection
+More instructions are available in the program UI and detailed implementation in the [Implementation document](https://github.com/KooEeVee/signal-processing/blob/main/documentation/implementation.md).
 
 ## Documentation
 
 [Specification](https://github.com/KooEeVee/signal-processing/blob/main/documentation/specification.md)
 
 [Implementation](https://github.com/KooEeVee/signal-processing/blob/main/documentation/implementation.md)
+
+[Testing](https://github.com/KooEeVee/signal-processing/blob/main/documentation/testing.md)
 
 ## Weekly Reports
 
