@@ -19,7 +19,7 @@ The program has three features: choose sound sample, plot the selected sample an
 
 ![Sound samples](sound_samples.png)
 
-Sine waves are generated in the program, with or without noise. Sine wave is a pure sine wave with frequency 440 Hz. Harmonic sine waves have frequencies 440 Hz, 880 Hz and 1320 Hz. Sine wave with some noise is 440 Hz pure sine wave plus amplitude 10 random noise, and sine wave with lots of noise has amplitude 50 random noise. Audio samples are musical instrument samples from University of Iowa Electronic Music Studios collection. The samples were converted to 2 second wav files with Audacity.
+Sine waves are generated in the program, with or without noise. Sine wave is a pure sine wave with frequency 440 Hz. Harmonic sine waves have frequencies 440 Hz, 880 Hz and 1320 Hz. Sine wave with some noise is 440 Hz pure sine wave plus amplitude 10 random noise, and sine wave with lots of noise has amplitude 50 random noise. Audio samples are musical instrument samples from University of Iowa Electronic Music Studios collection. Each sample contains only one note played by one instrument. The samples were converted to 2 second wav files with Audacity. 
 
 ![Plot samples in time-domain](plot_time.png)
 ![Plot samples in frequency-domain](plot_frequency.png)

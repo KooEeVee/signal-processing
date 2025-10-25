@@ -1,5 +1,5 @@
-import numpy as np
 import math
+import numpy as np
 
 
 def fft_np(sound):
@@ -26,7 +26,6 @@ def fundamental_frequency_np(sound, fs):
         float: fundamental frequency
     """
     sound = sound.ravel()
-    fs = fs
     sound_fft = np.abs(np.fft.rfft(sound))
     n = sound.shape[0]
     freq = np.fft.rfftfreq(n, d=1/fs)
@@ -97,7 +96,6 @@ def fundamental_frequency_fft(X, fs):
     """
     N = len(X) #number of samples in fft output
     X_pos = X[0:N//2] #fft output positive frequencies
-    fs = fs #sampling rate
     mags = [abs(x) for x in X_pos] #magnitudes of fft output
     freqs = [k / N * fs for k in range(N//2)] #frequencies
     peak = mags.index(max(mags)) #index of the maximum magnitude

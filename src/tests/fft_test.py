@@ -1,6 +1,6 @@
-import pytest
-import fft
 import numpy as np
+import fft
+
 
 def test_fft_compare_integers():
     """np.allclose relative tolerance between elements 1e-5, absolute tolerance between elements 1e-8

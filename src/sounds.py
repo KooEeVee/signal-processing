@@ -1,10 +1,10 @@
+import io
+import base64
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import librosa
-import io
-import base64
 
 
 def generate_sine(fs, s, f0):
@@ -18,9 +18,6 @@ def generate_sine(fs, s, f0):
     Returns:
         array: sine wave test signal
     """
-    fs = fs
-    s = s
-    f0 = f0
     t = np.linspace(0, s, int(fs * s))
     return np.sin(2 * np.pi * f0 * t)
 
@@ -37,9 +34,6 @@ def generate_noisysine(fs, s, f0, noise_amp):
     Returns:
         array: sine wave with noise test signal
     """
-    fs = fs
-    s = s
-    f0 = f0
     t = np.linspace(0, s, int(fs * s))
     return np.sin(2 * np.pi * f0 * t) + noise_amp * np.random.uniform(-1, 1, len(t)) # type: ignore
 
@@ -67,7 +61,6 @@ def to_note(freq):
     Returns:
         str: note name
     """
-    freq = freq
     return librosa.hz_to_note(freq)
 
 
@@ -80,7 +73,6 @@ def to_freq(note):
     Returns:
         _type_: _description_
     """
-    note = note
     return librosa.note_to_hz(note)
 
 
@@ -94,8 +86,6 @@ def plot_time(sound, fs):
     Returns:
         str: plot as a base64-encoded string
     """
-    sound = sound
-    fs = fs
     n = sound.shape[0]
     s = n / fs
     t = np.linspace(0, s, n)
@@ -125,8 +115,6 @@ def plot_time_sines(sound, fs):
     Returns:
         str: plot as a base64-encoded string
     """
-    sound = sound
-    fs = fs
     n = sound.shape[0]
     s = n / fs
     t = np.linspace(0, s, n)
@@ -157,7 +145,6 @@ def plot_freq(sound, fs):
         str: plot as a base64-encoded string
     """
     sound = sound.ravel()
-    fs = fs
     sound_fft = np.abs(np.fft.rfft(sound))
     sound_fft /= np.max(sound_fft)
     n = sound.shape[0]
@@ -176,7 +163,7 @@ def plot_freq(sound, fs):
     plt.close()
     return image_base64
 
-#
+
 def plot_freq_sines(sound, fs):
     """Plot numpy array sine wave signal magnitude spectrum in frequency-domain (real signal input), zoomed in the first 2000 Hz
 
@@ -188,7 +175,6 @@ def plot_freq_sines(sound, fs):
         str: plot as a base64-encoded string
     """
     sound = sound.ravel()
-    fs = fs
     sound_fft = np.abs(np.fft.rfft(sound))
     sound_fft /= np.max(sound_fft)
     n = sound.shape[0]
